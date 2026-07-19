@@ -13,8 +13,10 @@ datasource db {
 }
 
 model UserProfile {
-  id       String   @id @default(cuid())
-  username String   @unique
-  email    String   @unique
-  createAt DateTime @default(now()) @db.Timestamptz(6)
+  id        String   @id @default(cuid())
+  username  String   @unique
+  email     String   @unique
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+
+  @@map("userProfile")
 }
