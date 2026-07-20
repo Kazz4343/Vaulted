@@ -4,7 +4,7 @@ export default async function Dashboard() {
   const user = await getUserSession();
 
   return (
-    <div>
+    <div className="min-h-screen w-full bg-bgdark">
       <p>Welcom to Vaulted {user?.username}</p>
     </div>
   );
