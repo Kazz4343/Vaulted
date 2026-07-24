@@ -63,15 +63,15 @@ export default async function Home() {
             >
               Get Started
             </Link>
-            <Link
-              href="/dashboard"
+            <a
+              href="https://github.com/Kazz4343/Vaulted" target="_blank"
               className="bg-bgdark text-white-dark py-3.25 px-6.5 rounded-sm 
               font-bold text-sm cursor-pointer border border-gray-border
               transition-all duration-300 hover:-translate-y-0.5 
               hover:border-white-dark hover:shadow-[0_0_15px_rgba(236,106,94,0.4)]"
             >
               View Github
-            </Link>
+            </a>
           </div>
 
           <div className="grid text-left gap-3.5 grid-cols-[repeat(5,1fr)]">

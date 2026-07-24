@@ -2,11 +2,9 @@
 
 import { SignedIn, SignedOut, UserButton } from "@neondatabase/auth/react";
 import Link from "next/link";
-import { useState } from "react";
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-
+  
   return (
     <div className="bg-bgdark sticky top-0 z-50 w-full backdrop-blur-md border-b-gray-border border">
       <div className="flex items-center justify-between mx-auto h-11 max-w-6xl px-4">
@@ -21,7 +19,7 @@ export default function Navbar() {
               className="bg-bgdark border-white-dark
             text-xs px-4 py-1 border rounded-sm font-semibold"
             >
-              Log In
+              Log In  
             </Link>
             <Link
               href="auth/sign-up"
@@ -35,7 +33,7 @@ export default function Navbar() {
         </SignedOut>
 
         <SignedIn>
-          <UserButton className="h-9 w-55" />
+          <UserButton className="h-9 w-35" size='icon'/>
         </SignedIn>
       </div>
     </div>
