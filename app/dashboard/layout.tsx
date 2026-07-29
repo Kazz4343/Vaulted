@@ -4,7 +4,7 @@ import { UserButton } from "@neondatabase/auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function dashboardLayout({
+export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;

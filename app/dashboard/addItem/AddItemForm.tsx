@@ -1,5 +1,6 @@
 "use client";
 
+import { createItem } from "@/lib/actions/inventory";
 import { useState } from "react";
 
 export default function AddItemForm() {
@@ -19,13 +20,55 @@ export default function AddItemForm() {
     setDesc("");
   };
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [feedback, setFeedback] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
+
+  const handleSubmit = async(e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setFeedback(null);
+
+    const res = await createItem({
+      name: itemName,
+      sku: sku,
+      categoryName: cat,
+      quantity: quan,
+      minQuantity: low,
+      description: desc,
+    });
+
+    setIsSubmitting(false);
+
+    if (res.success) {
+      setFeedback({ type: "success", message: "Item saved to database!" });
+      handleClear();
+    } else {
+      setFeedback({ type: "error", message: res.err || "An error occurred." });
+    }
+  }
+
   return (
     <div className="w-full max-w-3xl rounded-2xl border border-zinc-800 bg-zinc-900 p-8 shadow-2xl">
       <h1 className="text-2xl font-bold">Add New Item</h1>
 
       <p className="mt-1 text-sm text-zinc-400">Create a new inventory item.</p>
 
-      <form className="mt-8 space-y-6">
+      {feedback && (
+        <div
+          className={`mt-4 rounded-lg p-3 text-sm border ${
+            feedback.type === "success"
+              ? "bg-green-500/10 text-green-400 border-green-500/20"
+              : "bg-red-500/10 text-red-400 border-red-500/20"
+          }`}
+        >
+          {feedback.message}
+        </div>
+      )}
+
+      <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
         {/* Name */}
         <div>
           <label className="mb-2 block text-sm font-medium">Item Name</label>
@@ -114,12 +157,16 @@ export default function AddItemForm() {
             type="button"
             className="rounded-lg border border-zinc-700 px-5 py-2"
             onClick={handleClear}
+            disabled={isSubmitting}
           >
             Clear
           </button>
 
-          <button className="rounded-lg bg-red-500 px-5 py-2 font-medium text-white hover:bg-red-600">
-            Save Item
+          <button className="rounded-lg bg-red-500 px-5 py-2 font-medium text-white hover:bg-red-600"
+            type="submit"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Saving..." : "Save Item"}
           </button>
         </div>
       </form>

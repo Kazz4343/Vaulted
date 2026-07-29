@@ -9,7 +9,7 @@ export default async function AuthPage({
 
   return (
     <div className="flex min-h-[100dvh] w-full flex-col items-center justify-center px-4 py-8 bg-bgdark">
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-md" suppressHydrationWarning>
         <AuthView pathname={pathname} />
       </div>
     </div>
