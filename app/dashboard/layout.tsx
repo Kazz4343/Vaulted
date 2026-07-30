@@ -35,8 +35,8 @@ export default function DashboardLayout({
       </div>
 
       {/* Left Bar & Main Content */}
-      <div className="flex">
-        <aside className="min-h-screen w-81 overflow-hidden px-3">
+      <div className="flex ">
+        <aside className="min-h-screen w-80.75 overflow-hidden px-3 bg-zinc-900 border-r border-gray-border">
           {nav_items.map((item) => {
             const isActive = pathname === item.href;
 
