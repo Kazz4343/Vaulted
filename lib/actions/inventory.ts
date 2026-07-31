@@ -55,3 +55,89 @@ export async function createItem( datas : CreateItemInput ) {
         return { success: false, err: err.message || "Failed to create item" }
     }
 }
+
+export async function updateItem (itemId : string , datas: CreateItemInput) {
+    try {
+        const trimCat = datas.categoryName.trim();
+ 
+        const { data: session } = await auth.getSession();
+ 
+        if (!session?.user) {
+            return { success: false, err: "Unauthorized. Please log in first." };
+        }
+
+        const existing = await prisma.item.findFirst({
+            where: {
+                id: itemId,
+                user: { email: session.user.email }
+            }
+        });
+
+        if(!existing) {
+            return {success: false, err: "Item not found."}
+        }
+
+        const updatedItem = await prisma.item.update({
+            where: { id: itemId },
+            data: {
+                name: datas.name,
+                sku: datas.sku,
+                quantity: datas.quantity,
+                minQuantity: datas.minQuantity,
+                description: datas.description || null,
+                category: trimCat
+                    ? {
+                        connectOrCreate: {
+                            where: { name: trimCat },
+                            create: { name: trimCat },
+                        },
+                    }
+                    : { disconnect: true },
+            },
+        });
+ 
+        revalidatePath('/dashboard');
+        return { success: true, item: updatedItem };
+
+
+    } catch (err : any ) {
+         if (err.code === "P2002") {
+            return { success: false, err: "An item with this SKU already exist." };
+        }
+        
+        return { success: false, err: err.message || "Failed to update item" };
+    }
+}
+
+export async function adjustQuantity(itemId: string, delta: number) {
+    try {
+        const { data: session } = await auth.getSession();
+ 
+        if (!session?.user) {
+            return { success: false, err: "Unauthorized. Please log in first." };
+        }
+ 
+        const existing = await prisma.item.findFirst({
+            where: {
+                id: itemId,
+                user: { email: session.user.email },
+            },
+        });
+ 
+        if (!existing) {
+            return { success: false, err: "Item not found." };
+        }
+ 
+        const nextQuantity = Math.max(0, existing.quantity + delta);
+ 
+        const updatedItem = await prisma.item.update({
+            where: { id: itemId },
+            data: { quantity: nextQuantity },
+        });
+ 
+        revalidatePath('/dashboard');
+        return { success: true, quantity: updatedItem.quantity };
+    } catch (err: any) {
+        return { success: false, err: err.message || "Failed to update quantity" };
+    }
+}
