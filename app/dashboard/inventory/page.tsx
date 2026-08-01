@@ -3,6 +3,8 @@ import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import SearchInput from "./SearchInput";
 import Link from "next/link";
+import ItemsTable from "./Itemstable";
+
 
 
 export default async function Inventory() {
@@ -30,10 +32,6 @@ export default async function Inventory() {
   const itemLength = items.length;
   const lowstockWarning = items.filter((item) => item.quantity <= item.minQuantity && item.quantity > 0).length
   const outofstock = items.filter((item) => item.quantity == 0).length;
-  
-  console.log(itemLength)
-  console.log(lowstockWarning)
-  console.log(outofstock)
 
 
   return (
@@ -90,57 +88,7 @@ export default async function Inventory() {
             No items found in your inventory. Click `+ New Item` to create one!
           </div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm">
-              <thead className="bg-zinc-900/50 border-b border-zinc-800 text-zinc-400 font-medium">
-                <tr>
-                  <th className="p-4">Name</th>
-                  <th className="p-4">SKU</th>
-                  <th className="p-4">Category</th>
-                  <th className="p-4">Qty</th>
-                  <th className="p-4">Status</th>
-                  <th className="p-4"></th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-zinc-800/60">
-                {items.map((item) => {
-                  // Determine status badge (Out of stock, Low Stock, or In Stock)
-                  const isOutOfStock = item.quantity === 0;
-                  const isLowStock = item.quantity <= item.minQuantity && !isOutOfStock;
-
-                  return (
-                    <tr key={item.id} className="hover:bg-zinc-800/40 transition-colors">
-                      <td className="p-4 font-medium text-white">{item.name}</td>
-                      <td className="p-4 font-mono text-xs text-zinc-400">{item.sku}</td>
-                      <td className="p-4 text-zinc-300">
-                        {item.category?.name || "Uncategorized"}
-                      </td>
-                      <td className="p-4 font-semibold text-white">{item.quantity}</td>
-                      <td className="p-4">
-                        {isOutOfStock ? (
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-red-500/10 text-red-400 border border-red-500/20">
-                            <span className="h-1.5 w-1.5 rounded-full bg-red-500" />
-                            Out of Stock
-                          </span>
-                        ) : isLowStock ? (
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                            <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
-                            Low Stock
-                          </span>
-                        ) : (
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                            In Stock
-                          </span>
-                        )}
-                      </td>
-                      <td className="cursor-pointer">...</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
+          <ItemsTable items={items} />
         )}
       </div>
     </div>
