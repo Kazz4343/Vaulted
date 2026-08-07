@@ -1,6 +1,6 @@
 # Vaulted 🔒
 
-> A brief 1-2 sentence overview of what Vaulted does, the core problem it solves, and key highlights.
+> A secure, modern web application designed for fast data management and seamless access control. Built with Next.js and Neon, Vaulted provides a reliable foundation ready for instant deployment and live production tweaks.
 
 ![Project Status](https://img.shields.io/badge/status-ready%20for%20deployment-success)
 ![License](https://img.shields.io/badge/license-MIT-blue)
@@ -9,20 +9,20 @@
 
 ## 🚀 Features
 
-- **Key Feature 1**: Brief description of the primary capability.
-- **Key Feature 2**: Brief description of secondary functionality or security highlight.
-- **Key Feature 3**: Seamless user experience / responsive UI / fast response times.
-- **Production Ready**: Configured for quick cloud deployment and runtime updates.
+- **Robust Authentication**: Powered by Neon Auth for modern, secure user identity management and role-based access.
+- **High-Performance Database**: Serverless PostgreSQL integration for instant scaling, low latency, and efficient querying.
+- **Modern Next.js Architecture**: Server-Side Rendering (SSR) and API routes for optimal speed, SEO, and responsiveness.
+- **Production Ready**: Fully configured for continuous integration and seamless deployment on Vercel.
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: [e.g., Next.js / React / Vue / HTML]
-- **Backend**: [e.g., Node.js / Express / Python / FastAPI / Go]
-- **Database**: [e.g., PostgreSQL / MongoDB / Redis]
-- **Authentication / Security**: [e.g., JWT / OAuth / NextAuth / Auth0]
-- **Hosting / Deployment**: [e.g., Vercel / Render / Railway / AWS / Docker]
+- **Frontend**: Next.js (React)
+- **Backend**: Next.js API Routes / Server Actions
+- **Database**: Serverless PostgreSQL (Neon)
+- **Authentication / Security**: Neon Auth
+- **Hosting / Deployment**: Vercel
 
 ---
 
@@ -30,12 +30,13 @@
 
 ```text
 Vaulted/
+├── app/                  # Next.js App Router (pages, layouts, and API routes)
+│   ├── api/             # API route endpoints
+│   ├── (auth)/          # Authentication routes & pages
+│   └── page.tsx         # Main entry page
+├── components/          # Reusable UI components
+├── lib/                 # Utility functions, database client & Neon configurations
 ├── public/              # Static assets (images, icons, etc.)
-├── src/                 # Source code
-│   ├── components/      # UI components
-│   ├── config/          # Environment configuration
-│   ├── routes/          # API routes or page endpoints
-│   └── utils/           # Helper functions & services
 ├── .env.example         # Template for environment variables
-├── package.json         # Project metadata and dependencies
-└── README.md            # Project documentation
+├── package.json         # Project dependencies and scripts
+└── README.md            # Project documentation          
