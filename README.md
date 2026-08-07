@@ -2,8 +2,7 @@
 
 > A secure, modern web application designed for fast data management and seamless access control. Built with Next.js and Neon, Vaulted provides a reliable foundation ready for instant deployment and live production tweaks.
 
-![Project Status](https://img.shields.io/badge/status-ready%20for%20deployment-success)
-![License](https://img.shields.io/badge/license-MIT-blue)
+
 
 ---
 
