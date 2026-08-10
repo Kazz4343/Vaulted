@@ -6,6 +6,8 @@
 
 ---
 
+![App Screenshot](public/image.png)
+
 ## 🚀 Features
 
 - **Robust Authentication**: Powered by Neon Auth for modern, secure user identity management and role-based access.
