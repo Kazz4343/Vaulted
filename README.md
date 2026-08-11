@@ -20,7 +20,7 @@
 - **Frontend**: Next.js (React)
 - **Backend**: Next.js API Routes / Server Actions
 - **Database**: Serverless PostgreSQL (Neon)
-- **Authentication**: Neon Auth
+- **Authentication**: NeonAuth
 - **Hosting / Deployment**: Vercel
 
 ---
