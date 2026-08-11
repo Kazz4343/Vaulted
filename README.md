@@ -2,8 +2,6 @@
 
 > A secure, modern web application designed for fast data management and seamless access control. Built with Next.js and Neon, Vaulted provides a reliable foundation ready for instant deployment and live production tweaks.
 
-
-
 ---
 
 ![App Screenshot](public/image.png)
@@ -22,7 +20,7 @@
 - **Frontend**: Next.js (React)
 - **Backend**: Next.js API Routes / Server Actions
 - **Database**: Serverless PostgreSQL (Neon)
-- **Authentication / Security**: Neon Auth
+- **Authentication**: Neon Auth
 - **Hosting / Deployment**: Vercel
 
 ---
@@ -40,4 +38,5 @@ Vaulted/
 ├── public/              # Static assets (images, icons, etc.)
 ├── .env.example         # Template for environment variables
 ├── package.json         # Project dependencies and scripts
-└── README.md            # Project documentation          
+└── README.md            # Project documentation
+```
